@@ -11,21 +11,21 @@ public class MainActivity extends ActionBarActivity {
 
     private boolean light = false; // true, if flashlight is on.
 
-    private Camera camera; // we will use camera for flashes handle.
+    private Camera camera; // uses for flash managing.
 
     private ImageButton tumbler;
 
     /**
-     * Calls, then application starts.
+     * Called when application starts.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        camera = Camera.open(); // creates a new Camera object to access camera.
-        tumbler = (ImageButton) findViewById(R.id.imageButton); // Finds our tumbler by id (was set by IDE).
-        switchLight(); // turn on the light, then started.
+        camera = Camera.open(); // creates a new Camera object to access the first back-facing camera on the device.
+        tumbler = (ImageButton) findViewById(R.id.imageButton); // searches the tumbler by id (was set by IDE).
+        switchLight(); // turns on the light after the application has started.
     }
 
     /**
@@ -45,7 +45,7 @@ public class MainActivity extends ActionBarActivity {
         param.setFlashMode(light ? Parameters.FLASH_MODE_OFF : Parameters.FLASH_MODE_TORCH);
         camera.setParameters(param);
         switchTumblerPic();
-        light = !light; // switch light state.
+        light = !light; // switches the light state.
     }
 
     /**
@@ -56,7 +56,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     /**
-     * Calls, then application close.
+     * Calls when application closes.
      */
     @Override
     protected void onDestroy() {
