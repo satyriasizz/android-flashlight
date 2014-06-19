@@ -1,35 +1,37 @@
 package com.sysgears.flashlight.app;
 
+import android.app.Activity;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
-    private boolean light = false; // true, if flashlight is on.
+    private boolean light = false; // true, if a flashlight is on.
 
-    private Camera camera; // uses for flash managing.
+    private Camera camera; // used for flash managing.
 
     private ImageButton tumbler;
 
     /**
-     * Called when application starts.
+     * Calls when application starts.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        camera = Camera.open(); // creates a new Camera object to access the first back-facing camera on the device.
-        tumbler = (ImageButton) findViewById(R.id.imageButton); // searches the tumbler by id (was set by IDE).
-        switchLight(); // turns on the light after the application has started.
+        // creates a new Camera object to access the first back-facing camera on the device.
+        camera = Camera.open();
+        // searches the tumbler by id (was set by IDE).
+        tumbler = (ImageButton) findViewById(R.id.imageButton);
+        switchLight(); // turns on the light after the application is started.
     }
 
     /**
-     * On click handler. Switches the light.
+     * onClick handler. Calls when user taps on button.
      *
      * @param v widget pressed
      */
@@ -38,11 +40,12 @@ public class MainActivity extends ActionBarActivity {
     }
 
     /**
-     * Switches the light.
+     * Switches light.
      */
     private void switchLight() {
         Parameters param = camera.getParameters();
-        param.setFlashMode(light ? Parameters.FLASH_MODE_OFF : Parameters.FLASH_MODE_TORCH);
+        param.setFlashMode(light ?
+                Parameters.FLASH_MODE_OFF : Parameters.FLASH_MODE_TORCH);
         camera.setParameters(param);
         switchTumblerPic();
         light = !light; // switches the light state.
@@ -64,4 +67,4 @@ public class MainActivity extends ActionBarActivity {
         camera.release();
         camera = null;
     }
-}
+} 
